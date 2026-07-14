@@ -1,6 +1,6 @@
 export class Account {
-  constructor(name, firstName, lastName, password, balance = 0, transactions = []) {
-    this.name = name;
+  constructor(acctNumber, firstName, lastName, password, balance = 0, transactions = []) {
+    this.acctNumber = acctNumber;
     this.firstName = firstName;
     this.lastName = lastName;
     this.password = password;
