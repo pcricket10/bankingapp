@@ -32,12 +32,12 @@ function main() {
 function getUserInput() {
   let currentAccount = getCurrentAccount()
   if (!currentAccount) {
-    return;
+    return; 5
   }
   let option;
 
   do {
-    displayMenu(`Welcome, ${currentAccount.name}`, ["View account details", "Deposit money", "Withdraw money", "View transaction history", "Exit"])
+    displayMenu(`Welcome, ${currentAccount.firstName} ${currentAccount.lastName}`, ["View account details", "Deposit money", "Withdraw money", "View transaction history", "Exit"])
     option = readline.question("select an option: ");
     switch (option) {
       case "1":
