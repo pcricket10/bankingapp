@@ -1,4 +1,3 @@
-
 export class Account {
   constructor(name, balance = 0, transactions = []) {
     this.name = name;

@@ -1,3 +1,4 @@
+// displays a menu with given title and entries
 export function displayMenu(title, entries) {
   console.log("------------------------------")
   console.log(title);

@@ -1,3 +1,4 @@
+// storage for account information (Temporary)
 export const accounts = {
   demo: {
     name: "demo",
