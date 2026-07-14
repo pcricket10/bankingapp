@@ -32,7 +32,7 @@ function main() {
 function getUserInput() {
   let currentAccount = getCurrentAccount()
   if (!currentAccount) {
-    return; 5
+    return;
   }
   let option;
 
