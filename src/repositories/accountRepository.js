@@ -1,13 +1,15 @@
+import Account from "../models/Account.js";
 const accounts = {};
 let currentAccount = null;
 
-export function save(account) {
-  accounts[account.acctNumber] = account;
-  return account;
+
+export async function create(account) {
+  return await Account.create(account);
 }
 
-export function findByAcctNumber(acctNumber) {
-  return accounts[acctNumber] ?? null;
+export async function findByAcctNumber(acctNumber) {
+  // return a single plain object, not an array
+  return await Account.findOne({ acctNumber: Number(acctNumber) }).lean();
 }
 
 export function setCurrent(account) {
