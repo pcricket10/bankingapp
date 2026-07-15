@@ -8,4 +8,6 @@ router.post("/login", login);
 router.get("/customer/:acctNumber", viewAccountDetails);
 router.delete("/customer/:acctNumber", deleteAccount);
 
+// router.post("/customer/:acctNumber/deposit",);
+
 export default router;
