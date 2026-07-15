@@ -55,3 +55,12 @@ export async function getAccountDetails(acctNumber) {
     balance: account.balance,
   };
 }
+
+export async function deleteAccount(acctNumber) {
+  const account = await accountRepo.findByAcctNumber(Number(acctNumber));
+  if (!account) throw appError(404, "Account not found.");
+
+  await Account.deleteOne({ acctNumber: Number(acctNumber) });
+
+  return { message: `Account ${acctNumber} deleted` };
+}

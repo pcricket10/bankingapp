@@ -35,3 +35,20 @@ export async function viewAccountDetails(req, res, next) {
     next(err);
   }
 }
+
+export async function deleteAccount(req, res, next) {
+  try {
+    const acctNumber = req.params.acctNumber;
+    if (!acctNumber) {
+      const err = new Error("acctNumber route param is required");
+      err.status = 400;
+      throw err;
+    }
+
+    const result = await customerService.deleteAccount(acctNumber);
+    console.log("deleteAccount result:", result);
+    return res.status(200).json(result);
+  } catch (err) {
+    next(err);
+  }
+}
