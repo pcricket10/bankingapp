@@ -12,6 +12,20 @@ export async function findByAcctNumber(acctNumber) {
   return await Account.findOne({ acctNumber: Number(acctNumber) }).lean();
 }
 
+export async function findByUsername(username) {
+
+  return await Account.findOne({ username: String(username).toLowerCase() }).lean();
+}
+
+export async function findByAcctNumberWithTransactions(acctNumber) {
+  return await Account.findOne({ acctNumber: Number(acctNumber) })
+    .populate({
+      path: "transactions",
+      options: { sort: { createdAt: -1 } },
+    })
+    .lean();
+}
+
 export function setCurrent(account) {
   currentAccount = account;
 }

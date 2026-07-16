@@ -2,6 +2,12 @@ import mongoose from "mongoose";
 
 const transactionSchema = new mongoose.Schema(
   {
+    account: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Account",
+      required: true,
+      index: true,
+    },
     type: {
       type: String,
       required: true,

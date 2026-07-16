@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function DeleteAccount({ accountId }) {
+function DeleteAccount({ accountId, token }) {
   const [message, setMessage] = useState("");
 
   const handleDeleteAccount = async () => {
@@ -8,6 +8,9 @@ function DeleteAccount({ accountId }) {
     try {
       const response = await fetch(`http://localhost:8080/api/customer/${accountId}`, {
         method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
 
       if (response.ok) {

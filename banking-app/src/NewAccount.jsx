@@ -4,6 +4,7 @@ function NewAccount() {
   const [acctNumber, setAcctNumber] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [msg, setMsg] = useState("");
 
@@ -15,7 +16,7 @@ function NewAccount() {
       const res = await fetch("http://localhost:8080/api/create-account", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ acctNumber, firstName, lastName, password }),
+        body: JSON.stringify({ acctNumber, firstName, lastName, username, password }),
       });
 
       const data = await res.json();
@@ -42,6 +43,10 @@ function NewAccount() {
         <label>
           Last Name:
           <input type="text" name="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+        </label>
+        <label>
+          Username:
+          <input type="text" name="username" value={username} onChange={(e) => setUsername(e.target.value)} />
         </label>
         <br />
         <label>
