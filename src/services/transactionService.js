@@ -1,29 +1,33 @@
-import { Account } from "../models/Account.js";
-import { Transaction } from "../models/Transaction.js";
-import { accounts } from "../data/accounts.js";
+import Account from "../models/Account.js";
+import Transaction from "../models/Transaction.js";
 
-import readline from "readline-sync";
+// adds a new transaction, either "deposit" or "withdrawal"
+export async function newTransaction(acctNumber, type, amt) {
+  const acctNum = Number(acctNumber);
+  const amount = Number(amt);
 
+  if (!Number.isFinite(acctNum)) throw new Error("invalid account number");
+  if (!["deposit", "withdrawal"].includes(type)) throw new Error("type must be 'deposit' or 'withdrawal'");
+  if (!Number.isFinite(amount) || amount <= 0) throw new Error("amount must be a positive number");
 
-//adds a new transaction, either "deposit" or "withdraw"
-export function newTransaction(account, type) {
-  const amt = readline.question(`How much money would you like to ${type}?: $`);
-  if (amt <= 0) {
-    console.log("amount must be positive");
-  } else if (type === "deposit") {
-    account.balance += parseFloat(amt)
-    account.transactions.push(new Transaction(type, amt))
-  } else {
-    if (amt > account.balance) {
-      console.log("insufficient funds")
-    } else {
-      account.balance -= parseFloat(amt)
-      account.transactions.push(new Transaction(type, amt))
-    }
-  }
+  const account = await Account.findOne({ acctNumber: acctNum });
+  if (!account) throw new Error("account not found");
 
-}
+  if (type === "withdrawal" && amount > account.balance) throw new Error("insufficient funds");
 
-export function viewTransactions(account) {
-  console.log(account.transactions)
+  // save transaction document
+  const tx = await Transaction.create({ account: account._id, type, amount });
+
+  // update account balance + add transaction reference
+  const delta = type === "deposit" ? amount : -amount;
+  const updated = await Account.findOneAndUpdate(
+    { acctNumber: acctNum },
+    {
+      $inc: { balance: delta },
+      $push: { transactions: tx._id },
+    },
+    { new: true }
+  );
+
+  return { message: "transaction posted", balance: updated.balance, transactionId: tx._id };
 }

@@ -1,0 +1,7 @@
+curl -X GET localhost:8080/api/customer/2
+curl -X GET localhost:8080/api/customer/4
+curl -s -X POST localhost:8080/api/create-account \
+        -H "Content-Type: application/json" \
+        -d '{"acctNumber": 4, "firstName":"Jane", "lastName":"Doe", "password": "789"}'
+curl -X GET localhost:8080/api/customer/4
+curl -X DELETE localhost:8080/api/customer/4
