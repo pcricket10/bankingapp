@@ -33,6 +33,8 @@ function ViewAccount(props) {
 
     <>
     <div>
+    <button onClick={() => setShowNewTransaction(true)}>New Transaction</button>
+    <button onClick={() => setShowTransactions(true)}>View Transactions</button>
       <h2>Account Details</h2>
       <p>Account Number: {accountDetails.acctNumber}</p>
       <p>Name: {accountDetails.firstName} {accountDetails.lastName}</p>
@@ -40,12 +42,10 @@ function ViewAccount(props) {
       <p>Transactions: {accountDetails.transactions?.length ?? 0}</p>
       <p>Account ID: {accountDetails._id ?? "N/A"}</p>
     </div>
-    <button onClick={() => setShowDelete(true)}>Delete Account</button>
-    <button onClick={() => setShowNewTransaction(true)}>New Transaction</button>
-    <button onClick={() => setShowTransactions(true)}>View Transactions</button>
     {showDelete && <DeleteAccount accountId={accountId} token={token} />}
     {showNewTransaction && <NewTransaction accountId={accountId} token={token} />}
     {showTransactions && <ViewTransactions accountId={accountId} token={token} />}
+    <button className="deleteButton" onClick={() => setShowDelete(true)}>Delete Account</button>
     </>
   );
 }

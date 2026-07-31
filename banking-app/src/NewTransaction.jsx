@@ -3,6 +3,7 @@ import { useState } from "react";
 function NewTransaction(props) {
   const { accountId, token } = props;
   const [transactionType, setTransactionType] = useState("deposit");
+  const [description, setDescription] = useState("");
   const [amount, setAmount] = useState("");
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
@@ -23,7 +24,7 @@ function NewTransaction(props) {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ type: transactionType, amount: Number(amount) }),
+      body: JSON.stringify({ type: transactionType, description: description, amount: Number(amount) }),
     })
       .then((response) => {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -48,6 +49,14 @@ function NewTransaction(props) {
           </select>
         </label>
         <br />
+        <label>
+          Description:
+          <input
+            type="text"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </label>
         <label>
           Amount:
           <input

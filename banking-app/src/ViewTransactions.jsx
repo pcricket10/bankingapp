@@ -26,7 +26,7 @@ function ViewTransactions({ accountId, token }) {
       <ul>
         {transactions.map((tx, index) => (
           <li key={index}>
-            {tx.type} of ${tx.amount} on {new Date(tx.createdAt).toLocaleString()}
+            {tx.type} of ${tx.amount} from {tx.description} on {new Date(tx.createdAt).toLocaleString()}
           </li>
         ))}
       </ul>

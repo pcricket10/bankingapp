@@ -15,6 +15,11 @@ const transactionSchema = new mongoose.Schema(
       trim: true,
       lowercase: true,
     },
+    description: {
+      type: String,
+      required: true,
+      trim: true,
+    },
     amount: {
       type: Number,
       required: true,

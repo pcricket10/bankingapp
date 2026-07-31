@@ -4,45 +4,28 @@ import Transaction from "./Transaction.js";
 const accountSchema = new mongoose.Schema(
   {
     acctNumber: {
-      type: Number,
-      required: true,
-      unique: true,
-      index: true
+      type: Number, required: true, unique: true, index: true
     },
     firstName: {
-      type: String,
-      required: true,
-      trim: true
+      type: String, required: true, trim: true
     },
 
     lastName: {
-      type: String,
-      required: true,
-      trim: true
+      type: String, required: true, trim: true
     },
     username: {
-      type: String,
-      required: true,
-      unique: true,
-      trim: true,
-      lowercase: true,
-      index: true,
+      type: String, required: true, unique: true, trim: true, lowercase: true, index: true,
     },
     password: {
-      type: String,
-      required: true
-    }, // later: store hashed passwords
+      type: String, required: true
+    },
     balance: {
-      type: Number,
-      required: true,
-      min: 0,
-      default: 0
+      type: Number, required: true, min: 0, default: 0
     },
     transactions: [{ type: mongoose.Schema.Types.ObjectId, ref: "Transaction" }],
   },
   {
-    timestamps: true,
-    versionKey: false
+    timestamps: true, versionKey: false
   }
 );
 

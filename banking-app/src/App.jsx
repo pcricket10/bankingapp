@@ -30,15 +30,19 @@ function App() {
 
   return (
     <>
+
+    <img className="logo" src="./src/assets/logo.png" alt="Banking App Logo" />
+
     <h1>Welcome to Banking App!</h1>
+    <p>Totally Legit!, 1000% Real!* certified by the Worse Business Bureau (WBB)</p>
 
     <div className="loginForm">
       {showLogin && <LoginForm onLoginSuccess={handleLoginSuccess} />}
       {showLogin && <button onClick={() => setShowRegister(true)}>Register</button>}
       {!showLogin && <button onClick={handleLogout}>Logout</button>}
-      {showRegister && <NewAccount />}
 
     </div>
+      {showRegister && <NewAccount />}
     {showAccount && accountId && token && <ViewAccount accountId={accountId} token={token} />}
 
     </>
